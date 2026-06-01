@@ -27,6 +27,7 @@ exports.registerUser = async (req, res) => {
             });
         }
     }catch(error){
+        console.error('Registration error:', error);
         res.status(500).json({message : "server error"});
     }
 };
@@ -43,10 +44,11 @@ exports.LoginUser = async (req,res) => {
                 email : user.email,
                 token : generateToken(user._id),
             });
-        }else {
-             res.status(401).json ({message : "Invalid email or password"});
-            }
-        }catch(error) {
-            res.status(500).json({message : error.message});
-        }
-}
+        }else{
+                res.status(401).json ({message : "Invalid email or password"});
+     }
+    } catch(error) {
+        console.error('Login error:', error);
+            // res.status(500).json({message : error.message});
+    }
+};

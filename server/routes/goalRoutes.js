@@ -7,7 +7,7 @@ router.get('/', protect, getGoals);
 
 router.post('/', protect, createGoal);
 
-router.put('/:id', protect, updateGoal);
+router.put('/:id', protect, updateGoals);
 
 router.delete('/:id', protect, deleteGoal);
 

@@ -2,19 +2,25 @@ const Goal = require("../models/Goal");
 
 exports.createGoal = async (req, res) => {
     try {
-        const {title, targetValue, deadLine} = req.body;
+        const { title, targetValue, deadline } = req.body;
 
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({ message: "User not authenticated" });
+        }
         const goal = await Goal.create({
-
-            user : req.user._id,
-            title, targetValue, deadLine
+            user: req.user._id,
+            title,
+            targetValue: Number(targetValue), 
+            deadline
         });
+
         res.status(201).json(goal);
-        console.log("Goal created successfully");
-    }catch(error) {
-        res.status(500).json({message : error.message});
+    } catch (error) {
+        console.error("Create Goal Error:", error); 
+        res.status(500).json({ message: error.message });
     }
 };
+
 
 exports.getGoals =  async (req, res) => {
     try{

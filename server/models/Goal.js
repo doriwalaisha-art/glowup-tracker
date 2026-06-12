@@ -28,7 +28,7 @@ const goalSchema = new mongoose.Schema({
 
     },
 
-    deadLine : {
+    deadline : {
         type : Date,
         required : [true,"Please provide a deadline for your goal"]
 

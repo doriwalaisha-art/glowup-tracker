@@ -1,36 +1,35 @@
 const mongoose = require('mongoose');
 
 const habitSchema = new mongoose.Schema({
-
-    user : {
-        type : mongoose.Schema.Types.ObjectId,
-        ref : "User",
-        required : true
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-
-    title : {
-        type : String,
-        required : [true, "Plese give your habit a Name"],
-        trim : true,
-        maxLength : [50, "Habit title cannot be more than 50 characters long"]
+    title: {
+        type: String,
+        required: [true, "Please give your habit a name"],
+        trim: true,
+        maxlength: [50, "Habit name cannot exceed 50 characters"]
     },
-
-    category : {
-        type : String,
-        required : [true, "Please select a category  for your habit"],
-        enum : ["Health", "Productivity", "Learning", "Fitness", "Hobby", "Other"],
-        default : "Other"
+    category: {
+        type: String,
+        required: true,
+        trim: true, // Removes accidental spaces
+        enum: {
+            values: ['Fitness', 'Skincare', 'Study', 'Mindset', 'Productivity', 'Other'],
+            message: '{VALUE} is not a supported category'
+        },
+        default: 'Other'
     },
-
-    completedDates : {
-        type : [String],
-        default : []
+    completedDates: {
+        type: [String],
+        default: []
     },
-
-    streaks : {
-        type : Number,
-        default : 0
+    streak: {
+        type: Number,
+        default: 0
     }
-}, {timestamps : true});
+}, { timestamps: true });
 
-module.exports = mongoose.model("Habit", habitSchema);
+module.exports = mongoose.model('Habit', habitSchema);

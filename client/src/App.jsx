@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Habits from './pages/Habits.jsx';
 import Goals from './pages/Goals.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/habits" element={<Habits/>} />
             <Route path="/goals" element={<Goals/>}/>
+            <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/" element={<Navigate to="/dashboard" />} /> 
           </Routes>
         </Router>
       </QueryClientProvider>

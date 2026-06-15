@@ -5,28 +5,27 @@ export const useProfile = () => {
     const queryClient = useQueryClient();
 
     const profileQuery = useQuery({
-        queryKey:['useProfile'],
-        queryFn : async () => {
-            const { data } = await  API.get('/users/profile');
+        queryKey: ['userProfile'], 
+        queryFn: async () => {
+            const { data } = await API.get('/users/profile');
             return data;
         },
     });
 
     const updateMutation = useMutation({
         mutationFn: async (updatedData) => {
-            const { data } = await API.put('/users/profile',updatedData);
+            const { data } = await API.put('/users/profile', updatedData);
             return data;
         },
         onSuccess: () => {
-            queryClient.invalidateQueries(['useProfile']);
+            queryClient.invalidateQueries(['userProfile']); 
         },
     });
 
     return {
-        profile : profileQuery.data,
-        isLoading : profileQuery.isLoading,
-        isError : profileQuery.isError,
-        updateProfile : updateMutation.mutate,
-        isUpdating :   updateMutation.isUpdating
+        profile: profileQuery.data,
+        isLoading: profileQuery.isLoading,
+        updateProfile: updateMutation.mutate,
+        isUpdating: updateMutation.isPending,
     };
 };

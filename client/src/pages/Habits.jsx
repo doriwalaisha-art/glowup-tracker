@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import HabitCard from '../components/HabitCard';
-import { useHabit } from '../hooks/useHabit';
+import { useHabits } from '../hooks/useHabits';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { useNavigate } from 'react-router-dom';
 
 
 const Habits = () => {
-    const { habits , isLoading, createHabit, toggleHabit, deleteHabit} = useHabit();
+    const { habits , isLoading, createHabit, toggleHabit, deleteHabit} = useHabits();
     const navigate = useNavigate();
     const [showModel,setShowModel] = useState(false);
     const [formData , setFormData] = useState({ title : '', category : 'Fitness'});
